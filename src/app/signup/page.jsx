@@ -22,11 +22,11 @@ export default function SignUpPage() {
         const password = e.target.password.value;
 
 
-        // const { data, error } = await authClient.signUp.email({
-        //     name,
-        //     email,
-        //     password,
-        // })
+        const { data, error } = await authClient.signUp.email({
+            name,
+            email,
+            password,
+        })
         // const res = await fetch("/api/signup", {
         //     method: "POST",
         //     headers: {
@@ -35,7 +35,6 @@ export default function SignUpPage() {
         //     body: JSON.stringify({ name, email, password }),
         // });
 
-        const { data, error } = await res.json();
 
         console.log({ name, email, password });
     };

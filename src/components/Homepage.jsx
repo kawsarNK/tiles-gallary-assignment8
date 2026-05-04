@@ -5,7 +5,6 @@ import TopGeneration from './FeaturedTiles';
 const Homepage = () => {
     return (
         <div>
-            This is Homepage
             <Banner />
             <Marquee />
             <TopGeneration />

@@ -23,12 +23,21 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${OutfitFont.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+
+      {/* <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
         <Footer />
+      </body> */}
 
-      </body>
+        <body>
+          <Navbar />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </body>
+      
     </html>
   );
 }
