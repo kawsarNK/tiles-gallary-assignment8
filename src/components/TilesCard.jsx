@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const TilesCard = ({ tile }) => {
     return (
@@ -41,9 +42,10 @@ const TilesCard = ({ tile }) => {
                 </div>
 
                 {/* Button */}
-                <button className="w-full border rounded-full py-2 hover:bg-gray-100 transition">
+                <Link href={`/all-tiles/${tile.id}`}><button className="w-full border rounded-full py-2 hover:bg-gray-100 transition">
                     View
                 </button>
+                </Link>
             </div>
         </div>
     );
