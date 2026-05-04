@@ -1,57 +1,46 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
-  const user = true;
   return (
-    <div className="navbar bg-base-100 shadow-sm px-4">
-
-      {/* Left - Logo */}
-      <div className="navbar-start">
-        <Link href="/" className="btn btn-ghost text-xl">
-          TileGallery
-        </Link>
-      </div>
-
-      {/* Center - Desktop Menu */}
-      <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal gap-5">
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/all-tiles">All Tiles</Link></li>
-          {user && <li><Link href="/my-profile">My Profile</Link></li>}
-        </ul>
-      </div>
-
-      {/* Right - Auth */}
-      <div className="navbar-end">
-        {!user ? (
-          <Link href="/login" className="btn btn-primary">
-            Login
-          </Link>
-        ) : (
-          <div className="flex items-center gap-3">
-            <span className="hidden md:block">user name</span>
-            <button className="btn btn-error btn-sm">
-              Logout
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Mobile Menu */}
-      <div className="dropdown md:hidden">
-        <div tabIndex={0} role="button" className="btn btn-ghost">
-          ☰
+    <div className="border-b px-2">
+      <nav className=" flex justify-between items-center  py-3 max-w-7xl mx-auto w-full">
+        <div className="flex gap-2 items-center">
+          {/* <Image
+            src={"/logo.png"}
+            alt="logo"
+            loading="eager"
+            width={30}
+            height={30}
+            className="object-cover h-auto w-auto"
+          /> */}
+          <h3 className="font-black text-lg">Tiles Gallary.</h3>
         </div>
-        <ul className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/all-tiles">All Tiles</Link></li>
-          {user && <li><Link href="/my-profile">My Profile</Link></li>}
-        </ul>
-      </div>
 
+        <ul className="flex items-center gap-5 text-sm">
+          <li>
+            <Link href={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link href={"/all-tiles"}>All Tiles</Link>
+          </li>
+          <li>
+            <Link href={"/my-profile"}>Profile</Link>
+          </li>
+        </ul>
+
+        <div className="flex gap-4">
+          <ul className="flex items-center  text-sm gap 5">
+            <li>
+              <Link href={"/signup"}>SignUp</Link>
+            </li>
+            <li>
+              <Link href={"/signin"}>SignIn</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
   );
 };

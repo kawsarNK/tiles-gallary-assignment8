@@ -32,6 +32,9 @@ const TileDetailsPage = async ({ params }) => {
                         width={400}
                         height={300}
                         className="rounded-xl object-cover w-full h-[220px]"
+                        onError={(e) => {
+                            e.currentTarget.src = "https://via.placeholder.com/800x600?text=Image+Coming+Soon";
+                        }}
                     />
                 </div>
 
