@@ -3,12 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
+import { Avatar } from "@heroui/react";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const userData = authClient.useSession()
+  const user = userData.data?.user
+  console.log(user);
 
-  // Temporary state for design preview - change to true to see logged-in view
-  const isLoggedIn = false;
+  const handlSignOut = async () => {
+    await authClient.signOut();
+  }
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,20 +31,7 @@ const Navbar = () => {
             <Link href="/" className="flex items-center gap-2 group">
               {/* Logo Icon */}
               <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-md">
-                {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 md:h-6 md:w-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg> */}
+
                 <Image
                   src="/tilesLogo.png"
                   alt="Tiles gallery logo"
@@ -76,12 +70,12 @@ const Navbar = () => {
             >
               My Profile
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 transition-all duration-300 group-hover:w-full"></span>
-            </Link> 
+            </Link>
           </div>
 
           {/* Right: Auth Buttons (Desktop) */}
           <div className="hidden lg:flex items-center space-x-4">
-            {!isLoggedIn ? (
+            {!user ? (
               <>
                 <Link
                   href="/signin"
@@ -100,11 +94,18 @@ const Navbar = () => {
               <>
                 {/* User Avatar (Logged In) */}
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-md cursor-pointer">
-                    <span className="text-white text-sm font-semibold">U</span>
-                  </div>
-                  <button
-                    className="px-5 py-2.5 text-gray-700 hover:text-red-600 font-medium transition-all duration-300 border-2 border-gray-300 rounded-lg hover:border-red-500 hover:shadow-md"
+
+                  <Avatar size="sm">
+                    <Avatar.Image
+                      alt="John Doe"
+                      src={user?.image}
+                      referrerPolicy="no-referrer"
+                    />
+                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
+
+                  <button onClick={handlSignOut}
+                    className="px-5 py-2.5 text-gray-700 hover:text-amber-500 font-medium transition-all duration-300 border-2 border-gray-300 rounded-lg hover:border-amber-500 hover:shadow-md"
                   >
                     Logout
                   </button>
@@ -142,30 +143,30 @@ const Navbar = () => {
               className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 hover:text-amber-600 font-medium transition-all duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
-              🏠 Home
+              Home
             </Link>
             <Link
               href="/all-tiles"
               className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 hover:text-amber-600 font-medium transition-all duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
-              🖼️ All Tiles
+              All Tiles
             </Link>
 
-            {isLoggedIn ? (
+            {user ? (
               <>
                 <Link
                   href="/my-profile"
                   className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 hover:text-amber-600 font-medium transition-all duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  👤 My Profile
+                  My Profile
                 </Link>
                 <button
                   className="block w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 font-medium transition-all duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  🚪 Logout
+                  Logout
                 </button>
               </>
             ) : (
