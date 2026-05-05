@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import TilesCard from '@/components/TilesCard';
+import 'animate.css';
 
 const AllTiles = () => {
     const [tiles, setTiles] = useState([]);
@@ -61,24 +62,6 @@ const AllTiles = () => {
         );
     }
 
-    // Error State
-    // if (error) {
-    //     return (
-    //         <div className="min-h-screen bg-base-200 flex items-center justify-center">
-    //             <div className="text-center">
-    //                 <div className="text-6xl mb-4">⚠️</div>
-    //                 <h2 className="text-2xl font-bold text-gray-800 mb-2">Something went wrong</h2>
-    //                 <p className="text-gray-600 mb-4">{error}</p>
-    //                 <button
-    //                     onClick={fetchTiles}
-    //                     className="btn bg-amber-500 hover:bg-amber-600 text-white border-none px-8"
-    //                 >
-    //                     Try Again
-    //                 </button>
-    //             </div>
-    //         </div>
-    //     );
-    // }
 
     return (
         <div className="min-h-screen bg-base-200 py-8 md:py-12">
@@ -163,8 +146,14 @@ const AllTiles = () => {
                 {/* Tiles Grid */}
                 {filteredTiles.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {filteredTiles.map(tile => (
-                            <TilesCard key={tile.id} tile={tile} />
+                        {filteredTiles.map((tile, index) => (
+                            <div
+                                key={tile.id}
+                                className="animate__animated animate__fadeInUp"
+                                style={{ animationDelay: `${index * 0.15}s` }}
+                            >
+                                <TilesCard tile={tile} />
+                            </div>
                         ))}
                     </div>
                 ) : (
