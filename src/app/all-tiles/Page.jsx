@@ -1,4 +1,3 @@
-// app/all-tiles/page.jsx
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ const AllTiles = () => {
     const [tiles, setTiles] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchTiles();
@@ -15,7 +15,13 @@ const AllTiles = () => {
 
     const fetchTiles = async () => {
         try {
+            setLoading(true);
             const res = await fetch('https://tiles-gallary-assignment8.vercel.app/data.json');
+
+            if (!res.ok) {
+                throw new Error('Failed to fetch tiles');
+            }
+
             const data = await res.json();
             const topTiles = data.tiles;
 
@@ -29,8 +35,10 @@ const AllTiles = () => {
             }));
 
             setTiles(safeTiles);
-        } catch (error) {
-            console.error('Error fetching tiles:', error);
+            setError(null);
+        } catch (err) {
+            console.error('Error fetching tiles:', err);
+            setError('Failed to load tiles. Please try again later.');
         } finally {
             setLoading(false);
         }
@@ -53,6 +61,25 @@ const AllTiles = () => {
         );
     }
 
+    // Error State
+    // if (error) {
+    //     return (
+    //         <div className="min-h-screen bg-base-200 flex items-center justify-center">
+    //             <div className="text-center">
+    //                 <div className="text-6xl mb-4">⚠️</div>
+    //                 <h2 className="text-2xl font-bold text-gray-800 mb-2">Something went wrong</h2>
+    //                 <p className="text-gray-600 mb-4">{error}</p>
+    //                 <button
+    //                     onClick={fetchTiles}
+    //                     className="btn bg-amber-500 hover:bg-amber-600 text-white border-none px-8"
+    //                 >
+    //                     Try Again
+    //                 </button>
+    //             </div>
+    //         </div>
+    //     );
+    // }
+
     return (
         <div className="min-h-screen bg-base-200 py-8 md:py-12">
             <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -60,7 +87,7 @@ const AllTiles = () => {
                 {/* Page Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
-                        Our Tiles Collection
+                        Our Tile Collection
                     </h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Explore our complete range of premium tiles for every space and style
@@ -71,7 +98,6 @@ const AllTiles = () => {
                 {/* Search Bar Hero UI */}
                 <div className="max-w-3xl mx-auto mb-10">
                     <div className="relative">
-                        {/* Search Icon */}
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +115,6 @@ const AllTiles = () => {
                             </svg>
                         </div>
 
-                        {/* Search Input */}
                         <input
                             type="text"
                             placeholder="Search tiles by name... (e.g., Ceramic Blue, Marble, Oak)"
@@ -98,7 +123,6 @@ const AllTiles = () => {
                             className="w-full pl-12 pr-4 py-4 md:py-5 text-lg bg-white rounded-2xl shadow-lg border-2 border-gray-200 focus:border-amber-500 focus:outline-none transition-all duration-300 hover:shadow-xl"
                         />
 
-                        {/* Clear Button */}
                         {searchTerm && (
                             <button
                                 onClick={() => setSearchTerm('')}
@@ -122,7 +146,6 @@ const AllTiles = () => {
                         )}
                     </div>
 
-                    {/* Search Results Count */}
                     <div className="text-center mt-3">
                         {searchTerm ? (
                             <p className="text-gray-600">
@@ -145,7 +168,6 @@ const AllTiles = () => {
                         ))}
                     </div>
                 ) : (
-                    /* No Results Found */
                     <div className="text-center py-16">
                         <div className="text-6xl mb-4">🔍</div>
                         <h3 className="text-2xl font-bold text-gray-800 mb-2">No Tiles Found</h3>
