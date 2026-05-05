@@ -34,7 +34,7 @@ export default function SignUpPage() {
             image,
         })
         if (!error) {
-            router.push('/')
+            router.push('/signin')
         }
 
 

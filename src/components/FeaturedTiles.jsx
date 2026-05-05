@@ -21,7 +21,7 @@ const TopGeneration = async () => {
         <div className="text-center mb-12">
             <h3 className="font-bold mt-6 mb-3 text-3xl md:text-4xl">Featured Tiles</h3>
             <div className="w-24 h-1 bg-amber-500 mx-auto mb-2"></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
+            <div className="mx-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
 
                 {
                     safeTiles.map(tile => (
