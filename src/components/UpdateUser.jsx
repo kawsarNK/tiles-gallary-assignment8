@@ -18,19 +18,23 @@ export function UpdateUserModal() {
 
     };
     return (
-        <Modal>
-            <Button variant="secondary">
+        <Modal className="border-4 border-amber-300">
+            <Button variant="secondary" className="text-amber-900 font-bold">
                 <BiEdit /> Update Profile
             </Button>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
                     <Modal.Dialog className="sm:max-w-md">
                         <Modal.CloseTrigger />
-                        <Modal.Header>
-                            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
+
+                        <Modal.Header className="flex flex-col items-center justify-center text-center py-4">
+                            {/* Centered Icon Container */}
+                            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground flex items-center justify-center rounded-full p-2 mb-2">
                                 <BiUser className="size-5" />
                             </Modal.Icon>
-                            <Modal.Heading>Update User</Modal.Heading>
+
+                            {/* Centered Heading */}
+                            <Modal.Heading className="text-xl font-semibold">Update User</Modal.Heading>
                         </Modal.Header>
                         <Modal.Body className="p-6">
                             <Surface variant="default">

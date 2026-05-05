@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
   const userData = authClient.useSession()
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   const handlSignOut = async () => {
     await authClient.signOut();
+    redirect('/signin')
   }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -105,7 +107,7 @@ const Navbar = () => {
                   </Avatar>
 
                   <button onClick={handlSignOut}
-                    className="px-5 py-2.5 text-gray-700 hover:text-amber-500 font-medium transition-all duration-300 border-2 border-gray-300 rounded-lg hover:border-amber-500 hover:shadow-md"
+                    className="px-5 py-2.5 text-red  bg-amber-400 hover:bg-amber-600 font-medium transition-all duration-300  rounded-lg hover:border-amber-900 hover:shadow-md"
                   >
                     Logout
                   </button>
