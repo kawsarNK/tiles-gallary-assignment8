@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const TilesCard = ({ tile }) => {
-    
+
     const getCategoryColor = (category) => {
         const colors = {
             ceramic: 'bg-amber-100 text-amber-800 border-amber-200',
@@ -24,13 +24,13 @@ const TilesCard = ({ tile }) => {
         <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
 
             {/* Image Section */}
-            <div className="relative overflow-hidden">
+            <div className="relative h-[250px] w-full overflow-hidden rounded-t-2xl">
                 <Image
                     src={tile.image}
                     alt={tile.title}
-                    width={400}
-                    height={250}
-                    className="object-cover rounded-t-2xl"
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
 
                 {/* Category Badge - Top Right */}

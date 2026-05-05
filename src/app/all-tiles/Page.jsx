@@ -3,7 +3,8 @@ import TilesCard from '@/components/TilesCard';
 import React from 'react';
 
 const AllTiles = async () => {
-    const res = await fetch('https://tiles-gallary-assignment8.vercel.app/data.json')
+    const res = await fetch('http://localhost:3000/data.json')
+    // ('https://tiles-gallary-assignment8.vercel.app/data.json')
     const tiles = await res.json()
     const topTiles = tiles.tiles;
     const safeTiles = topTiles.map(tile => ({

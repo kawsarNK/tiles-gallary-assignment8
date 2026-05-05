@@ -11,29 +11,31 @@ import {
     Label,
     TextField,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+
+    const router = useRouter()
+
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
 
         const name = e.target.name.value;
+        const image = e.target.image.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-
 
         const { data, error } = await authClient.signUp.email({
             name,
             email,
             password,
+            image,
         })
-        // const res = await fetch("/api/signup", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({ name, email, password }),
-        // });
+        if (!error) {
+            router.push('/')
+        }
 
 
         console.log({ name, email, password });
@@ -47,6 +49,12 @@ export default function SignUpPage() {
                 <TextField isRequired name="name" type="text">
                     <Label>Name</Label>
                     <Input placeholder="Enter your name" />
+                    <FieldError />
+                </TextField>
+
+                <TextField isRequired name="image" type="text">
+                    <Label>Image URL</Label>
+                    <Input placeholder="Image URL" />
                     <FieldError />
                 </TextField>
 
