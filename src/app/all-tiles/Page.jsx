@@ -150,7 +150,7 @@ const AllTiles = () => {
                         {searchTerm ? (
                             <p className="text-gray-600">
                                 Found <span className="font-semibold text-amber-600">{filteredTiles.length}</span> tiles
-                                for "<span className="font-semibold">{searchTerm}</span>"
+                                for <span className="font-semibold">{searchTerm}</span>
                             </p>
                         ) : (
                             <p className="text-gray-500">
@@ -172,7 +172,7 @@ const AllTiles = () => {
                         <div className="text-6xl mb-4">🔍</div>
                         <h3 className="text-2xl font-bold text-gray-800 mb-2">No Tiles Found</h3>
                         <p className="text-gray-600 mb-6">
-                            We couldn't find any tiles matching "{searchTerm}". Try a different search term.
+                            We couldn't find any tiles matching {searchTerm}. Try a different search term.
                         </p>
                         <button
                             onClick={() => setSearchTerm('')}

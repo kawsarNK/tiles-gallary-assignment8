@@ -37,7 +37,7 @@ export default function SignInPage() {
 
             if (error) {
                 setError(error.message || "Invalid email or password");
-                console.log({ data, error });
+                // console.log({ data, error });
             }
         } catch (err) {
             setError("An unexpected error occurred. Please try again.");

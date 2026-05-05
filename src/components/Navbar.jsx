@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 const Navbar = () => {
   const userData = authClient.useSession()
   const user = userData.data?.user
-  console.log(user);
+  // console.log(user);
 
   const handlSignOut = async () => {
     await authClient.signOut();

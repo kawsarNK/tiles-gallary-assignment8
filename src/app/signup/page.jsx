@@ -1,4 +1,3 @@
-// app/signup/page.jsx
 "use client";
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
